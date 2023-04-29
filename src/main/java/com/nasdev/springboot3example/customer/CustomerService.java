@@ -1,6 +1,7 @@
 package com.nasdev.springboot3example.customer;
 
 import com.nasdev.springboot3example.exception.DuplicateResourceException;
+import com.nasdev.springboot3example.exception.RequestValidateException;
 import com.nasdev.springboot3example.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -48,9 +49,30 @@ public class CustomerService {
         Customer customer = customerDao.getCustomerById(customerId)
                 .orElseThrow(() -> new ResourceNotFoundException("customer with id [%s] not found".formatted(customerId)));
 
-        customer.setName(customerRequest.name());
-        customer.setEmail(customerRequest.email());
-        customer.setAge(customerRequest.age());
+        boolean changes = false;
+
+        if (customerRequest.name() != null && !customerRequest.name().equals(customer.getName())) {
+            customer.setName(customerRequest.name());
+            changes = true;
+        }
+
+        if (customerRequest.age() != null && !customerRequest.age().equals(customer.getAge())) {
+            customer.setAge(customerRequest.age());
+            changes = true;
+        }
+
+        if (customerRequest.email() != null && !customerRequest.email().equals(customer.getEmail())) {
+            if (customerDao.isExistsWithEmail(customerRequest.email())) {
+                throw new DuplicateResourceException("email already taken");
+            }
+
+            customer.setEmail(customerRequest.email());
+            changes = true;
+        }
+
+        if (!changes) {
+            throw new RequestValidateException("no data changes found");
+        }
 
         customerDao.updateCustomer(customer);
     }
