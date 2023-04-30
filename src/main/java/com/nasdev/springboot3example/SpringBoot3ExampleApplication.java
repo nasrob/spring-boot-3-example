@@ -23,7 +23,7 @@ public class SpringBoot3ExampleApplication {
 			Customer jane = new Customer("Jane", "jane@gmail.com", 33);
 
 			List<Customer> customers = List.of(john, jane);
-			customerRepository.saveAll(customers);
+			// customerRepository.saveAll(customers);
 		};
 	}
 }
