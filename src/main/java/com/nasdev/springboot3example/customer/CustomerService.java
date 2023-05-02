@@ -46,7 +46,7 @@ public class CustomerService {
 
     public void updateCustomer(Integer customerId, CustomerRequest customerRequest) {
 
-        Customer customer = customerDao.getCustomerById(customerId)
+        Customer customer = customerDao.selectCustomerById(customerId)
                 .orElseThrow(() -> new ResourceNotFoundException("customer with id [%s] not found".formatted(customerId)));
 
         boolean changes = false;
