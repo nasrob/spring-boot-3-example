@@ -62,7 +62,7 @@ class CustomerServiceTest {
 
         // Then
         assertThatThrownBy(() -> underTest.getCustomer(id))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("customer with id [%s] not found".formatted(id));
     }
 

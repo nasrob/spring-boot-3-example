@@ -23,7 +23,7 @@ public class CustomerService {
 
     public Customer getCustomer(Integer customerId) {
         return customerDao.selectCustomerById(customerId)
-                .orElseThrow(() -> new IllegalArgumentException("customer with id [%s] not found".formatted(customerId)));
+                .orElseThrow(() -> new ResourceNotFoundException("customer with id [%s] not found".formatted(customerId)));
     }
 
     public void addCustomer(CustomerRequest customerRequest) {
