@@ -1,23 +1,24 @@
 HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+*/target/
+*/!.mvn/wrapper/maven-wrapper.jar
+*/!**/src/main/**/target/
+*/!**/src/test/**/target/
 
 ### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+*/.apt_generated
+*/.classpath
+*/.factorypath
+*/.project
+*/.settings
+*/.springBeans
+*/.sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+*/.idea
+.idea/
+*/*.iws
+*/*.iml
+*/*.ipr
 
 ### NetBeans ###
 /nbproject/private/
@@ -33,3 +34,7 @@ build/
 .vscode/
 
 Dockerrun.aws.json
+
+*/node_modules
+*/.DS_Store
+.DS_Store
