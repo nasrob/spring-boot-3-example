@@ -14,6 +14,22 @@ services:
       - db
     restart: unless-stopped
 
+  spring-boot-3-example:
+     container_name: spring-boot-3-example
+     image: nasserbouk/spring-boot-3-example
+     environment:
+       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/customer
+     ports:
+       - "8088:8080"
+     networks:
+       - db
+     depends_on:
+       - db
+     restart: unless-stopped
+     command:
+       - --spring.datasource.url=jdbc:postgresql://db:5432/customer
+
+
 networks:
   db:
     driver: bridge
